@@ -20,7 +20,7 @@ module ActionView
         country_options = ""
 
         if priority_countries
-          if (unlisted = priority_countries - COUNTRIES).any?
+          if (unlisted = priority_countries - COUNTRY_SELECT_COUNTRIES).any?
             raise RuntimeError.new("Supplied priority countries are not in the main list: #{unlisted}")
           end
           country_options += options_for_select(priority_countries, selected)
@@ -34,11 +34,11 @@ module ActionView
 
         country_options = country_options.html_safe if country_options.respond_to?(:html_safe)
 
-        return country_options + options_for_select(COUNTRIES, selected)
+        return country_options + options_for_select(COUNTRY_SELECT_COUNTRIES, selected)
       end
 
       # All the countries included in the country_options output.
-      COUNTRIES = [
+      COUNTRY_SELECT_COUNTRIES = [
         "Afghanistan",
         "Åland Islands",
         "Albania",
@@ -288,7 +288,7 @@ module ActionView
         "Yemen",
         "Zambia",
         "Zimbabwe"
-      ] unless const_defined?("COUNTRIES")
+      ] unless const_defined?("COUNTRY_SELECT_COUNTRIES")
     end
 
     module CountrySelectTag
